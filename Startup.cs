@@ -11,6 +11,9 @@ using kitchen_counter.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using kitchen_counter.Database;
+using Microsoft.Extensions.Options;
+
 
 namespace kitchen_counter
 {
@@ -45,6 +48,8 @@ namespace kitchen_counter
             {
                 configuration.RootPath = "ClientApp/dist";
             });
+
+            services.AddSingleton<IDatabaseSettings>( db => db.GetRequiredService<IOptions<DatabaseSettings>>().Value);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
