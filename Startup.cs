@@ -13,6 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using kitchen_counter.Database;
 using Microsoft.Extensions.Options;
+using kitchen_counter.Services;
 
 
 namespace kitchen_counter
@@ -50,6 +51,8 @@ namespace kitchen_counter
             });
 
             services.AddSingleton<IDatabaseSettings>( db => db.GetRequiredService<IOptions<DatabaseSettings>>().Value);
+
+            services.AddScoped<UserService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
