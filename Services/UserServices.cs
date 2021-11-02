@@ -15,6 +15,7 @@ namespace kitchen_counter.Services
     {
         
         private readonly IMongoCollection<User> users;
+
         private readonly string key;
 
         public UserService(IConfiguration configuration)
@@ -24,7 +25,7 @@ namespace kitchen_counter.Services
             var database = client.GetDatabase("kitchen-counter");
 
             users = database.GetCollection<User>("Users");
-            
+
             this.key = configuration.GetSection("JWTKey").ToString();
         }
 
@@ -39,7 +40,7 @@ namespace kitchen_counter.Services
             return user;
         }
 
-        public string Authenticate (string email, string password)
+        public string Authenticate(string email, string password)
         {
             var user = this.users.Find(x => x.Email == email && x.Password == password).FirstOrDefault();
 
@@ -51,9 +52,9 @@ namespace kitchen_counter.Services
             var tokenKey = Encoding.ASCII.GetBytes(key);
 
             var tokenDescriptor = new SecurityTokenDescriptor() {
-
+                
                 Subject = new ClaimsIdentity(new Claim[]{
-                    new Claim(ClaimTypes.Email, email),
+                    new Claim(ClaimTypes.Email, email)
                 }),
 
                 Expires = DateTime.UtcNow.AddHours(1),

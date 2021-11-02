@@ -14,9 +14,9 @@ using Microsoft.Extensions.Hosting;
 using kitchen_counter.Database;
 using Microsoft.Extensions.Options;
 using kitchen_counter.Services;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 
 namespace kitchen_counter
@@ -42,27 +42,28 @@ namespace kitchen_counter
 
             services.AddIdentityServer()
                 .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
-
+            services.AddControllers();
             services.Configure<DatabaseSettings>(
                 Configuration.GetSection(nameof(DatabaseSettings))
             );
-
-            services.AddAuthentication(x => 
+            services.AddAuthentication(x =>
             {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
             })
-                .AddJwtBearer( x => 
+                .AddIdentityServerJwt()
+                .AddJwtBearer(x => 
                 {
                     x.RequireHttpsMetadata = false;
                     x.SaveToken = true;
                     x.TokenValidationParameters = new TokenValidationParameters{
                         ValidateIssuerSigningKey = true,
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(Configuration.GetSection("JWTkey").ToString())),
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(Configuration.GetSection("JWTKey").ToString())),
                         ValidateIssuer = false,
                         ValidateAudience = false
                     };
                 });
+            
             services.AddControllersWithViews();
             services.AddRazorPages();
             // In production, the Angular files will be served from this directory

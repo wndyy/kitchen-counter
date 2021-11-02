@@ -6,6 +6,7 @@ using kitchen_counter.Services;
 
 namespace kitchen_counter.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class UserController : Controller
@@ -37,6 +38,19 @@ namespace kitchen_counter.Controllers
             service.Create(user);
 
             return Json(user);
+        }
+
+        [AllowAnonymous]
+        [Route("authenticate")]
+        [HttpPost]
+        public ActionResult Login ( [FromBody] User user)
+        {
+            var token = service.Authenticate(user.Email, user.Password);
+
+            if(token == null)
+                return Unauthorized();
+
+            return Ok(new {token, user});
         }
     }
 }
