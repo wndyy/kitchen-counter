@@ -20,5 +20,21 @@ namespace kitchen_counter.Models
 
         [BsonElement("Phone")]
         public string Phone { get; set; }
+
+        [BsonElement("Menu")]
+        public MenuItem[] Menu { get; set; }
+    }
+
+    public class MenuItem 
+    {
+        [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string Id { get; set; }
+
+        [BsonElement("ItemName")]
+        public string ItemName { get; set; }
+
+        [BsonElement("ItemImage")]
+        public byte[] ItemImage { get; set; }
     }
 }

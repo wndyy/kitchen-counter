@@ -14,5 +14,14 @@ namespace kitchen_counter.Models
 
         [BsonElement("Password")]
         public string Password { get; set; }
+
+        [BsonElement("FirstName")]
+        public string FirstName { get; set; }
+
+        [BsonElement("LastName")]
+        public string LastName { get; set; }
+
+        [BsonElement("Phone")]
+        public string Phone { get; set; }
     }
 }
