@@ -32,6 +32,7 @@ namespace kitchen_counter.Controllers
             return Json(user);
         }
 
+        [AllowAnonymous]
         [HttpPost]
         public ActionResult<User> Create (User user) 
         {
@@ -45,10 +46,13 @@ namespace kitchen_counter.Controllers
         [HttpPost]
         public ActionResult Login ( [FromBody] User user)
         {
-            var token = service.Authenticate(user.Email, user.Password);
+            var res = service.Authenticate(user.Email, user.Password);
 
-            if(token == null)
+            if(res[0] == null)
                 return Unauthorized();
+
+            user.Id = res[1];
+            var token = res[0];
 
             return Ok(new {token, user});
         }

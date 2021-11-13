@@ -15,7 +15,7 @@ export class AuthService {
     this.http.post<UserLogin>(this._baseURL + '/api/user/authenticate', { email: email,  password: password }).subscribe(res => {
       localStorage.setItem('token', res.token);
       localStorage.setItem('email', res.user.email);
-      localStorage.setItem('password', res.user.password);
+      localStorage.setItem('user_id', res.user.id);
       this.loggedIn = true;
     });
   }
@@ -23,7 +23,15 @@ export class AuthService {
   logOut() {
     localStorage.removeItem('token');
     localStorage.removeItem('email');
-    localStorage.removeItem('password');
+    localStorage.removeItem('user_id');
     this.loggedIn = false;
+  }
+
+  public isLoggedIn(): boolean {
+    return this.loggedIn;
+  }
+
+  public getToken(): string {
+    return localStorage.getItem('token');
   }
 }

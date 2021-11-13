@@ -40,12 +40,14 @@ namespace kitchen_counter.Services
             return user;
         }
 
-        public string Authenticate(string email, string password)
+        public Dictionary<int, string> Authenticate(string email, string password)
         {
             var user = this.users.Find(x => x.Email == email && x.Password == password).FirstOrDefault();
 
             if(user == null)
                 return null;
+
+            var userID = user.Id;
 
             var tokenHandler = new JwtSecurityTokenHandler();
 
@@ -66,8 +68,13 @@ namespace kitchen_counter.Services
             };
 
             var token = tokenHandler.CreateToken(tokenDescriptor);
+            var JWTtoken = tokenHandler.WriteToken(token);
 
-            return tokenHandler.WriteToken(token);
+            var JSONresponse = new Dictionary<int, string>();
+            JSONresponse.Add(0, JWTtoken);
+            JSONresponse.Add(1, userID);
+
+            return JSONresponse;
         }
     }
 }

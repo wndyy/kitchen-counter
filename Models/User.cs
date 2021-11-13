@@ -23,5 +23,8 @@ namespace kitchen_counter.Models
 
         [BsonElement("Phone")]
         public string Phone { get; set; }
+
+        [BsonElement("StoreID")]
+        public string StoreID { get; set; }
     }
 }
