@@ -11,8 +11,13 @@ import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { ApiAuthorizationModule } from 'src/api-authorization/api-authorization.module';
 import { LoginUserComponent } from './login-user/login-user.component';
-import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { AuthGuard } from './guards/auth.guard';
+import { AuthorizeInterceptor } from 'src/api-authorization/authorize.interceptor';
+import { RegisterUserComponent } from './register-user/register-user.component';
+import { CreateStoreComponent } from './create-store/create-store.component';
+import { StoreComponent } from './store/store.component';
+import { StoreOrdersComponent } from './store-orders/store-orders.component';
+import { UserOrdersComponent } from './user-orders/user-orders.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +26,12 @@ import { AuthGuard } from './guards/auth.guard';
     HomeComponent,
     CounterComponent,
     FetchDataComponent,
-    LoginUserComponent
+    LoginUserComponent,
+    RegisterUserComponent,
+    CreateStoreComponent,
+    StoreComponent,
+    StoreOrdersComponent,
+    UserOrdersComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -34,9 +44,7 @@ import { AuthGuard } from './guards/auth.guard';
       { path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthGuard] },
     ])
   ],
-  providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
-  ],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

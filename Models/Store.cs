@@ -23,6 +23,9 @@ namespace kitchen_counter.Models
 
         [BsonElement("Menu")]
         public MenuItem[] Menu { get; set; }
+
+        [BsonElement("Orders")]
+        public string[] Orders { get; set; }
     }
 
     public class MenuItem 

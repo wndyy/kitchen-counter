@@ -3,23 +3,18 @@ import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent } from '@angular/c
 import { Observable } from 'rxjs';
 import { AuthorizeService } from './authorize.service';
 import { mergeMap } from 'rxjs/operators';
+import { AuthService } from 'src/app/services/auth.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthorizeInterceptor implements HttpInterceptor {
-  constructor(private authorize: AuthorizeService) { }
+  constructor(private auth: AuthService, private router: Router) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    return this.authorize.getAccessToken()
-      .pipe(mergeMap(token => this.processRequestWithToken(token, req, next)));
-  }
-
-  // Checks if there is an access_token available in the authorize service
-  // and adds it to the request in case it's targeted at the same origin as the
-  // single page application.
-  private processRequestWithToken(token: string, req: HttpRequest<any>, next: HttpHandler) {
-    if (!!token && this.isSameOriginUrl(req)) {
+    const token = this.auth.getToken();
+    if (!!token) {
       req = req.clone({
         setHeaders: {
           Authorization: `Bearer ${token}`
@@ -29,6 +24,21 @@ export class AuthorizeInterceptor implements HttpInterceptor {
 
     return next.handle(req);
   }
+
+  // Checks if there is an access_token available in the authorize service
+  // and adds it to the request in case it's targeted at the same origin as the
+  // single page application.
+  /**private processRequestWithToken(token: string, req: HttpRequest<any>, next: HttpHandler) {
+    if (!!token && this.isSameOriginUrl(req)) {
+      req = req.clone({
+        setHeaders: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+    }
+
+    return next.handle(req);
+  }*/
 
   private isSameOriginUrl(req: any) {
     // It's an absolute url with the same origin.

@@ -19,6 +19,9 @@ namespace kitchen_counter.Models
         [BsonElement("StoreID")]
         public string StoreID { get; set; }
 
+        [BsonElement("StoreName")]
+        public string StoreName { get; set; }
+
         [BsonElement("OrderItems")]
         public string[] OrderItems { get; set; }
 
