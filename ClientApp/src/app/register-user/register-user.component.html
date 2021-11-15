@@ -1,1 +1,72 @@
-<p>register-user works!</p>
+<div class="register-user">
+    <form [formGroup]="registerUserForm" (ngSubmit)="onSubmit()">
+        <div style="width: 550px">
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label for="firstName">First Name</label>
+                    <input type="text" 
+                    class="form-control" 
+                    id="firstName" 
+                    formControlName="firstName"
+                    placeholder="Jane">
+                </div>
+                <div *ngIf="registerUserForm.controls['firstName'].invalid  && (registerUserForm.controls['firstName'].dirty || registerUserForm.controls['firstName'].touched)" class="alert alert-danger">
+                    <div *ngIf="registerUserForm.controls['firstName'].errors.required">
+                        First Name is required
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <label for="lastName">Last Name</label>
+                    <input type="text" 
+                    class="form-control" 
+                    id="lastName" 
+                    formControlName="lastName"
+                    placeholder="Doe">
+                </div>
+                <div *ngIf="registerUserForm.controls['lastName'].invalid  && (registerUserForm.controls['lastName'].dirty || registerUserForm.controls['lastName'].touched)" class="alert alert-danger">
+                    <div *ngIf="registerUserForm.controls['lastName'].errors.required">
+                        Last Name is required
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+
+        <div class="form-group" style="width: 250px">
+            <label for="phone" class="required">Phone Number</label>
+            <input type="text" class="form-control" id="phone" formControlName="phone" placeholder="123-4567">
+        </div>
+        <div style="width: 250px" *ngIf="registerUserForm.controls['phone'].invalid  && (registerUserForm.controls['phone'].dirty || registerUserForm.controls['phone'].touched)" class="alert alert-danger">
+            <div *ngIf="registerUserForm.controls['phone'].errors.required">
+                Phone Number is required
+            </div>
+        </div>
+
+        <div class="form-group" style="width: 250px">
+            <label for="email" class="required">Email</label>
+            <input type="text" class="form-control" id="email" formControlName="email" placeholder="user@email.com">
+        </div>
+        <div style="width: 250px" *ngIf="registerUserForm.controls['email'].invalid  && (registerUserForm.controls['email'].dirty || registerUserForm.controls['email'].touched)" class="alert alert-danger">
+            <div *ngIf="registerUserForm.controls['email'].errors.required">
+                Email is required
+            </div>
+        </div>
+
+        <div class="form-group" style="width: 250px">
+            <label for="password" class="required">Password</label>
+            <input type="text" class="form-control" id="password" formControlName="password" placeholder="******">
+        </div>
+        <div style="width: 250px" *ngIf="registerUserForm.controls['password'].invalid  && (registerUserForm.controls['password'].dirty || registerUserForm.controls['password'].touched)" class="alert alert-danger">
+            <div *ngIf="registerUserForm.controls['password'].errors.required">
+                Password is required
+            </div>
+        </div>
+
+        <button class="btn btn-success" type="submit" [disabled]="registerUserForm.pristine || registerUserForm.invalid">Register</button>
+        <button class="btn btn-default" [routerLink]="['/']">Cancel</button>
+
+    </form>
+</div>

@@ -40,6 +40,14 @@ namespace kitchen_counter.Services
             return user;
         }
 
+        public void AddOrder(string userID, string orderID)
+        {
+            var query = Builders<User>.Filter.Eq("_id", userID);
+            var update = Builders<User>.Update.Push("Orders", orderID);
+            users.UpdateOneAsync(query, update);
+
+        }
+
         public Dictionary<int, string> Authenticate(string email, string password)
         {
             var user = this.users.Find(x => x.Email == email && x.Password == password).FirstOrDefault();

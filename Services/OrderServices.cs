@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Microsoft.Extensions.Configuration;
 using MongoDB.Driver;
+using MongoDB.Bson;
 using MongoDB.Driver.GridFS;
 using kitchen_counter.Models;
 
@@ -19,11 +20,14 @@ namespace kitchen_counter.Services
             orders = database.GetCollection<Order>("Orders");
         }
 
-        public Order Create(Order order)
+        public string Create(Order order)
         {
+            var orderID = ObjectId.GenerateNewId();
+            order.Id = orderID.ToString();
             orders.InsertOne(order);
+            
+            return order.Id;
 
-            return order;
         }
 
         public Order GetOrder(string id) => orders.Find<Order>(order => order.Id == id).FirstOrDefault();

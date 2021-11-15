@@ -16,7 +16,7 @@ namespace kitchen_counter.Models
         public string Name { get; set; }
 
         [BsonElement("Image")]
-        public byte[] Image { get; set; }
+        public string Image { get; set; }
 
         [BsonElement("Phone")]
         public string Phone { get; set; }
@@ -38,6 +38,6 @@ namespace kitchen_counter.Models
         public string ItemName { get; set; }
 
         [BsonElement("ItemImage")]
-        public byte[] ItemImage { get; set; }
+        public string ItemImage { get; set; }
     }
 }

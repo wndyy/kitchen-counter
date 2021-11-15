@@ -18,6 +18,7 @@ namespace kitchen_counter.Controllers
             service = _service;
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public ActionResult<List<User>> GetUsers()
         {
