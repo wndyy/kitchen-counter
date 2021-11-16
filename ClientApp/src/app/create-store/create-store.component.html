@@ -1,1 +1,36 @@
-<p>create-store works!</p>
+<div class="create-store">
+    <form [formGroup]="createStoreForm" (ngSubmit)="onSubmit()">
+        <div class="form-group" style="width: 250px">
+            <label for="name" class="required">Name</label>
+            <input type="text" class="form-control" id="name" formControlName="name" placeholder="Greg's Bakery">
+        </div>
+        <div style="width: 250px" *ngIf="createStoreForm.controls['name'].invalid  && (createStoreForm.controls['name'].dirty || createStoreForm.controls['name'].touched)" class="alert alert-danger">
+            <div *ngIf="createStoreForm.controls['name'].errors.required">
+                Name is required
+            </div>
+        </div>
+
+        <div class="form-group" style="width: 250px">
+            <label for="phone" class="required">Phone Number</label>
+            <input type="text" class="form-control" id="phone" formControlName="phone" placeholder="123-4567">
+        </div>
+        <div style="width: 250px" *ngIf="createStoreForm.controls['phone'].invalid  && (createStoreForm.controls['phone'].dirty || createStoreForm.controls['phone'].touched)" class="alert alert-danger">
+            <div *ngIf="createStoreForm.controls['phone'].errors.required">
+                Phone number is required
+            </div>
+        </div>
+
+        <div class="form-group" style="width: 250px">
+            <label for="description" class="required">Description</label>
+            <textarea rows="4" cols="50" type="text" class="form-control" id="description" formControlName="description" placeholder="A bakery..."></textarea>
+        </div>
+        <div style="width: 250px" *ngIf="createStoreForm.controls['description'].invalid  && (createStoreForm.controls['description'].dirty || createStoreForm.controls['description'].touched)" class="alert alert-danger">
+            <div *ngIf="createStoreForm.controls['description'].errors.required">
+                Description is required and has to be at least 20 characters
+            </div>
+        </div>
+
+        <button class="btn btn-success" type="submit" [disabled]="createStoreForm.pristine || createStoreForm.invalid">Create</button>
+        <button class="btn btn-default" [routerLink]="['/']">Cancel</button>
+    </form>
+</div>

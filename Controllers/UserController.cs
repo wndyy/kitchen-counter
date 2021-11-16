@@ -18,7 +18,6 @@ namespace kitchen_counter.Controllers
             service = _service;
         }
 
-        [AllowAnonymous]
         [HttpGet]
         public ActionResult<List<User>> GetUsers()
         {
@@ -53,6 +52,7 @@ namespace kitchen_counter.Controllers
                 return Unauthorized();
 
             user.Id = res[1];
+            user.StoreID = res[2];
             var token = res[0];
 
             return Ok(new {token, user});

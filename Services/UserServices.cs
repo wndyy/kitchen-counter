@@ -56,6 +56,7 @@ namespace kitchen_counter.Services
                 return null;
 
             var userID = user.Id;
+            var storeID = user.StoreID;
 
             var tokenHandler = new JwtSecurityTokenHandler();
 
@@ -81,6 +82,7 @@ namespace kitchen_counter.Services
             var JSONresponse = new Dictionary<int, string>();
             JSONresponse.Add(0, JWTtoken);
             JSONresponse.Add(1, userID);
+            JSONresponse.Add(2, storeID);
 
             return JSONresponse;
         }

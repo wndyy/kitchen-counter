@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -8,20 +9,26 @@ export class AuthService {
 
   _baseURL = 'http://localhost:5000';
   loggedIn = false;
+  subLoggedIn: Subject<boolean> = new Subject<boolean>();
+  subHasStore: Subject<boolean> = new Subject<boolean>();
 
   constructor(private http: HttpClient) { }
 
   logIn(email: string, password: string) {
     console.log(email, password);
-    this.http.get(this._baseURL + '/api/user/').subscribe(res => {
-      console.log(res);
-    });
     this.http.post<UserLogin>(this._baseURL + '/api/user/authenticate', { email: email,  password: password }).subscribe(res => {
-      console.log(res);
-      localStorage.setItem('token', res.token);
-      localStorage.setItem('email', res.user.email);
-      localStorage.setItem('user_id', res.user.id);
-      this.loggedIn = true;
+      if (res) {
+        console.log(res);
+        localStorage.setItem('token', res.token);
+        localStorage.setItem('email', res.user.email);
+        localStorage.setItem('user_id', res.user.id);
+        if (res.user.storeID) {
+          localStorage.setItem('store_id', res.user.storeID);
+          this.subHasStore.next(true);
+        }
+        this.loggedIn = true;
+        this.subLoggedIn.next(true);
+      }
     });
   }
 
@@ -30,6 +37,7 @@ export class AuthService {
     localStorage.removeItem('email');
     localStorage.removeItem('user_id');
     this.loggedIn = false;
+    this.subLoggedIn.next(false);
   }
 
   public isLoggedIn(): boolean {

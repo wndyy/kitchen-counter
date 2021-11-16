@@ -44,7 +44,8 @@ import { UserOrdersComponent } from './user-orders/user-orders.component';
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthGuard] },
       { path: 'register-user', component: RegisterUserComponent },
-      { path: 'login-user', component: LoginUserComponent }
+      { path: 'login-user', component: LoginUserComponent },
+      { path: 'create-store', component: CreateStoreComponent }
     ])
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true }],
