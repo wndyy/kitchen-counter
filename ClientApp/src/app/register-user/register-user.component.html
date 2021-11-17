@@ -61,7 +61,10 @@
         </div>
         <div style="width: 250px" *ngIf="registerUserForm.controls['password'].invalid  && (registerUserForm.controls['password'].dirty || registerUserForm.controls['password'].touched)" class="alert alert-danger">
             <div *ngIf="registerUserForm.controls['password'].errors.required">
-                Password is required and has to be at least 6 characters
+                Password is required 
+            </div>
+            <div *ngIf="registerUserForm.controls['password'].errors.minlength">
+                Password needs to be at least 6 characters
             </div>
         </div>
 

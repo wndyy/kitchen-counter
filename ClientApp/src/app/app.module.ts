@@ -18,6 +18,7 @@ import { CreateStoreComponent } from './create-store/create-store.component';
 import { StoreComponent } from './store/store.component';
 import { StoreOrdersComponent } from './store-orders/store-orders.component';
 import { UserOrdersComponent } from './user-orders/user-orders.component';
+import { AddMenuItemComponent } from './add-menu-item/add-menu-item.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { UserOrdersComponent } from './user-orders/user-orders.component';
     CreateStoreComponent,
     StoreComponent,
     StoreOrdersComponent,
-    UserOrdersComponent
+    UserOrdersComponent,
+    AddMenuItemComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -45,7 +47,8 @@ import { UserOrdersComponent } from './user-orders/user-orders.component';
       { path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthGuard] },
       { path: 'register-user', component: RegisterUserComponent },
       { path: 'login-user', component: LoginUserComponent },
-      { path: 'create-store', component: CreateStoreComponent }
+      { path: 'create-store', component: CreateStoreComponent },
+      { path: 'add-menu-item', component: AddMenuItemComponent }
     ])
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true }],

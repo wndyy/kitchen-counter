@@ -1,5 +1,6 @@
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using System.Collections.Generic;
 
 namespace kitchen_counter.Models
 {
@@ -21,6 +22,9 @@ namespace kitchen_counter.Models
         [BsonElement("Phone")]
         public string Phone { get; set; }
 
+        [BsonElement("UserID")]
+        public string UserID { get; set; }
+
         [BsonElement("Menu")]
         public MenuItem[] Menu { get; set; }
 
@@ -30,14 +34,10 @@ namespace kitchen_counter.Models
 
     public class MenuItem 
     {
-        [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
-        public string Id { get; set; }
+        [BsonElement("Name")]
+        public string Name { get; set; }
 
-        [BsonElement("ItemName")]
-        public string ItemName { get; set; }
-
-        [BsonElement("ItemImage")]
-        public string ItemImage { get; set; }
+        [BsonElement("Image")]
+        public string Image { get; set; }
     }
 }

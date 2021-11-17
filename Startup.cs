@@ -75,6 +75,7 @@ namespace kitchen_counter
             services.AddSingleton<IDatabaseSettings>( db => db.GetRequiredService<IOptions<DatabaseSettings>>().Value);
 
             services.AddScoped<UserService>();
+            services.AddScoped<StoreService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

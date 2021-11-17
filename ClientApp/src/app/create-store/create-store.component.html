@@ -21,12 +21,25 @@
         </div>
 
         <div class="form-group" style="width: 250px">
+            <label for="image" class="required">Store Picture</label>
+            <input type="file" accept="image/png, image/gif, image/jpeg" (change)="getImage($event)" class="form-control" id="image" formControlName="image">
+        </div>
+        <div style="width: 250px" *ngIf="createStoreForm.controls['image'].invalid  && (createStoreForm.controls['image'].dirty || createStoreForm.controls['image'].touched)" class="alert alert-danger">
+            <div *ngIf="createStoreForm.controls['image'].errors.required">
+                Store picture is required
+            </div>
+        </div>
+
+        <div class="form-group" style="width: 500px">
             <label for="description" class="required">Description</label>
             <textarea rows="4" cols="50" type="text" class="form-control" id="description" formControlName="description" placeholder="A bakery..."></textarea>
         </div>
-        <div style="width: 250px" *ngIf="createStoreForm.controls['description'].invalid  && (createStoreForm.controls['description'].dirty || createStoreForm.controls['description'].touched)" class="alert alert-danger">
+        <div style="width: 500px" *ngIf="createStoreForm.controls['description'].invalid  && (createStoreForm.controls['description'].dirty || createStoreForm.controls['description'].touched)" class="alert alert-danger">
             <div *ngIf="createStoreForm.controls['description'].errors.required">
-                Description is required and has to be at least 20 characters
+                Description is required
+            </div>
+            <div *ngIf="createStoreForm.controls['description'].errors.minlength">
+                Description needs to be at least 30 chars
             </div>
         </div>
 

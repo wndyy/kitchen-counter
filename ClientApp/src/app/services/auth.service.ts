@@ -36,12 +36,18 @@ export class AuthService {
     localStorage.removeItem('token');
     localStorage.removeItem('email');
     localStorage.removeItem('user_id');
+    localStorage.removeItem('store_id');
     this.loggedIn = false;
     this.subLoggedIn.next(false);
+    this.subHasStore.next(false);
   }
 
   public isLoggedIn(): boolean {
     return this.loggedIn;
+  }
+
+  public getUserID(): string {
+    return localStorage.getItem('user_id');
   }
 
   public getToken(): string {

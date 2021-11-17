@@ -8,6 +8,7 @@ using Microsoft.IdentityModel.Tokens;
 using MongoDB.Driver;
 using kitchen_counter.Database;
 using kitchen_counter.Models;
+using MongoDB.Bson;
 
 namespace kitchen_counter.Services
 {
@@ -44,6 +45,18 @@ namespace kitchen_counter.Services
         {
             var query = Builders<User>.Filter.Eq("_id", userID);
             var update = Builders<User>.Update.Push("Orders", orderID);
+            users.UpdateOneAsync(query, update);
+
+        }
+
+        public void AddStore(string userID, string storeID)
+        {
+            var query = Builders<User>.Filter.Eq("_id", ObjectId.Parse(userID));
+            var update = Builders<User>.Update.Set("StoreID", storeID);
+            Console.WriteLine("userID");
+            Console.WriteLine(userID);
+            Console.WriteLine("storeID");
+            Console.WriteLine(storeID);
             users.UpdateOneAsync(query, update);
 
         }

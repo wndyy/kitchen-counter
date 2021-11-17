@@ -12,17 +12,20 @@ namespace kitchen_counter.Controllers
     public class StoreController : Controller
     {
         private readonly StoreService service;
+        private readonly UserService userService;
 
-        public StoreController(StoreService _service)
+        public StoreController(StoreService _service, UserService user_service)
         {
             service = _service;
+            userService = user_service;
         }
 
         [AllowAnonymous]
         [HttpGet]
         public ActionResult<List<Store>> GetStores()
         {
-            return service.GetStores();
+            var stores = service.GetStores();
+            return Json(stores);
         }
 
         [AllowAnonymous]
@@ -34,10 +37,19 @@ namespace kitchen_counter.Controllers
             return Json(user);
         }
 
+        [HttpPost("{id:length(24)}")]
+        public ActionResult<Store> AddMenuItem(string id, [FromBody]MenuItem item)
+        {
+            service.AddMenuItem(id, item);
+
+            return Json(item);
+        }
+
         [HttpPost]
         public ActionResult<Store> Create (Store store) 
         {
-            service.Create(store);
+            var storeID = service.Create(store);
+            userService.AddStore(store.UserID, storeID);
 
             return Json(store);
         }

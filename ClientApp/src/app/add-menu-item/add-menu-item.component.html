@@ -1,0 +1,26 @@
+<div class="add-menu-item">
+    <form [formGroup]="addMenuItemForm" (ngSubmit)="onSubmit()">
+        <div class="form-group" style="width: 250px">
+            <label for="name" class="required">Item Name</label>
+            <input type="text" class="form-control" id="name" formControlName="name" placeholder="Oatmeal Cookie">
+        </div>
+        <div style="width: 250px" *ngIf="addMenuItemForm.controls['name'].invalid  && (addMenuItemForm.controls['name'].dirty || addMenuItemForm.controls['name'].touched)" class="alert alert-danger">
+            <div *ngIf="addMenuItemForm.controls['name'].errors.required">
+                Item name is required
+            </div>
+        </div>
+
+        <div class="form-group" style="width: 250px">
+            <label for="image" class="required">Item Picture</label>
+            <input type="file" accept="image/png, image/gif, image/jpeg" (change)="getImage($event)" class="form-control" id="image" formControlName="image">
+        </div>
+        <div style="width: 250px" *ngIf="addMenuItemForm.controls['image'].invalid  && (addMenuItemForm.controls['image'].dirty || addMenuItemForm.controls['image'].touched)" class="alert alert-danger">
+            <div *ngIf="addMenuItemForm.controls['image'].errors.required">
+                Item picture is required
+            </div>
+        </div>
+
+        <button class="btn btn-success" type="submit" [disabled]="addMenuItemForm.pristine || addMenuItemForm.invalid">Add</button>
+        <button class="btn btn-default" [routerLink]="['/']">Cancel</button>
+    </form>
+</div>
