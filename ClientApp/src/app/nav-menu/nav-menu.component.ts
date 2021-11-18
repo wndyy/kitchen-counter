@@ -15,6 +15,7 @@ export class NavMenuComponent {
   logSubscription: any;
   storeSubscription: any;
   createStoreSub: any;
+  toggleFlag = false;
 
 
   constructor(private auth: AuthService, private router: Router, private store: StoreService) {
@@ -28,6 +29,10 @@ export class NavMenuComponent {
     this.createStoreSub = this.store.subHasStore.subscribe((value) => {
       this.hasStore = value;
     });
+  }
+
+  showToggle() {
+    this.toggleFlag = !this.toggleFlag;
   }
 
   logout() {

@@ -35,10 +35,12 @@
             >
           </li>
 
-          <li ngbDropdown *ngIf="isLoggedIn && hasStore" [routerLinkActive]="['link-active']" class="nav-item">
-            <a href (click)="false" class="nav-link" ngbDropdownToggle>My Store</a>
-            <div ngbDropdownMenu>
-              <button ngbDropdownItem [routerLink]="['/add-menu-item']">Add Menu Item</button>
+          <li *ngIf="isLoggedIn && hasStore" [routerLinkActive]="['link-active']" class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" (click) = "showToggle()" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              My Store
+            </a>
+            <div class="dropdown-menu" [ngClass] = "{'show': toggleFlag}" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" [routerLink]="['/add-menu-item']">Add Menu Item</a>
             </div>
           </li>
 
