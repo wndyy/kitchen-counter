@@ -20,7 +20,8 @@ import { StoreOrdersComponent } from './store-orders/store-orders.component';
 import { UserOrdersComponent } from './user-orders/user-orders.component';
 import { AddMenuItemComponent } from './add-menu-item/add-menu-item.component';
 import { StoreService } from './services/store.service';
-import { DynamicFormQuestionComponent } from './dynamic-form-question/dynamic-form-question/dynamic-form-question.component';
+import { DynamicFormQuestionComponent } from './dynamic-form-question/dynamic-form-question.component';
+import { DynamicFormComponent } from './dynamic-form/dynamic-form.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { DynamicFormQuestionComponent } from './dynamic-form-question/dynamic-fo
     StoreOrdersComponent,
     UserOrdersComponent,
     AddMenuItemComponent,
-    DynamicFormQuestionComponent
+    DynamicFormQuestionComponent,
+    DynamicFormComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
