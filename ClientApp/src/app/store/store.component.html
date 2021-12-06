@@ -1,1 +1,4 @@
-<p>store works!</p>
+<img *ngIf="store" src={{store.image}} class="img-fluid" alt="Responsive image">
+<h1 *ngIf="store">{{ store.name }}</h1> 
+<h3 *ngIf="store">Contact: {{ store.phone }}</h3> 
+<h3 *ngIf="store">{{ store.description }}</h3> 

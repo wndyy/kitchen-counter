@@ -19,6 +19,8 @@ import { StoreComponent } from './store/store.component';
 import { StoreOrdersComponent } from './store-orders/store-orders.component';
 import { UserOrdersComponent } from './user-orders/user-orders.component';
 import { AddMenuItemComponent } from './add-menu-item/add-menu-item.component';
+import { StoreService } from './services/store.service';
+import { DynamicFormQuestionComponent } from './dynamic-form-question/dynamic-form-question/dynamic-form-question.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,8 @@ import { AddMenuItemComponent } from './add-menu-item/add-menu-item.component';
     StoreComponent,
     StoreOrdersComponent,
     UserOrdersComponent,
-    AddMenuItemComponent
+    AddMenuItemComponent,
+    DynamicFormQuestionComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -48,7 +51,8 @@ import { AddMenuItemComponent } from './add-menu-item/add-menu-item.component';
       { path: 'register-user', component: RegisterUserComponent },
       { path: 'login-user', component: LoginUserComponent },
       { path: 'create-store', component: CreateStoreComponent },
-      { path: 'add-menu-item', component: AddMenuItemComponent }
+      { path: 'add-menu-item', component: AddMenuItemComponent },
+      { path: 'store/:id', component: StoreComponent}
     ])
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true }],

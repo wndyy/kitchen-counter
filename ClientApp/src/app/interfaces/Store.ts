@@ -5,4 +5,5 @@ interface Store {
     description: string;
     image: string;
     userID: string;
+    menu: any;
 }

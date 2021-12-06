@@ -47,7 +47,6 @@ export class CreateStoreComponent implements OnInit {
     this.router.navigate(['/']);
     console.log(this.image);
     console.log(this.createStoreForm.value);
-    this.service.getStore();
   }
 
 }

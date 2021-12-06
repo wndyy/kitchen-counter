@@ -27,7 +27,6 @@ export class AddMenuItemComponent implements OnInit {
 
         reader.onload = (_event: any) => {
           this.image = _event.target.result;
-          console.log(this.image);
         };
         reader.readAsDataURL(event.target.files[0]);
     }

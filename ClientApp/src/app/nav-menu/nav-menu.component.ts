@@ -35,6 +35,10 @@ export class NavMenuComponent {
     this.toggleFlag = !this.toggleFlag;
   }
 
+  getStoreID() {
+    return this.store.getStoreID();
+  }
+
   logout() {
     this.auth.logOut();
     this.isLoggedIn = false;

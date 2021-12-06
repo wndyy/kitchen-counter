@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs';
+import { analyzeAndValidateNgModules } from '@angular/compiler';
 
 @Injectable({
   providedIn: 'root'
@@ -22,12 +23,8 @@ export class StoreService {
     });
   }
 
-  getStore () {
-    this.http.get<Store[]>(this._baseURL + '/api/store/').subscribe(res => {
-      if (res) {
-        console.log(res);
-      }
-    });
+  getStore (id: string) {
+    return this.http.get<Store>(this._baseURL + '/api/store/' + id);
   }
 
   getStoreID () {
@@ -38,7 +35,6 @@ export class StoreService {
     this.http.post<MenuItem>(this._baseURL + '/api/store/' + id, menuItem).subscribe(res => {
       if (res) {
         console.log(res);
-        this.getStore();
       }
     });
   }
