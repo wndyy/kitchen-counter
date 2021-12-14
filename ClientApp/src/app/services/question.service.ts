@@ -16,7 +16,8 @@ export class QuestionService {
       questions.push(new TextboxQuestion({
         key: item.name,
         label: item.name,
-        type: 'number'
+        type: 'number',
+        image: item.image,
       }));
     });
     return of(questions);

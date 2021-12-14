@@ -10,6 +10,7 @@ export class TextboxQuestion extends QuestionBase<string> {
         controlType?: string;
         type?: string;
         options?: {key: string, value: string}[];
+        image?: string;
       } = {}) {
       options.controlType = 'textbox';
       super(options);

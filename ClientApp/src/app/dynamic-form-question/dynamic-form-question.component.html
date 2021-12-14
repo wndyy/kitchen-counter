@@ -1,10 +1,11 @@
-<div [formGroup]="form">
-    <label [attr.for]="question.key">{{question.label}}</label>
+<div [formGroup]="form" style="display:inline-block">
+    <img src={{question.image}} style="width:300px;"/>
+    <div><label [attr.for]="question.key">{{question.label}}</label></div>
   
     <div [ngSwitch]="question.controlType">
   
       <input *ngSwitchCase="'textbox'" [formControlName]="question.key"
-              [id]="question.key" [type]="question.type">
+              [id]="question.key" [type]="question.type" placeholder="0" min="0" max="99" style="width: 45px">
   
     </div>
   

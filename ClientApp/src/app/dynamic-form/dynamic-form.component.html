@@ -1,9 +1,11 @@
 <div>
     <form (ngSubmit)="onSubmit()" [formGroup]="form">
-  
-      <div *ngFor="let question of questions" class="form-row">
-        <app-question [question]="question" [form]="form"></app-question>
-      </div>
+      
+      <div style="column-count:3; justify-content: center; text-align: center; min-width: 500px; flex-wrap: wrap">
+        <div *ngFor="let question of questions; let i=index">
+          <app-question [question]="question" [form]="form"></app-question>
+        </div>
+      </div>  
   
       <div class="form-row">
         <button type="submit" [disabled]="!form.valid">Save</button>
